@@ -3,14 +3,13 @@
 let mapleader=","
 let g:mapleader=","
 
-set autoread 		" auto read when file is changed from outside
+set autoread 			" auto read when file is changed from outside
 set history=100 		" keep 100 lines of command list history 
 autocmd! bufwritepost .vimrc source ~/.vimrc	"auto reload vimrc when editing
 
 nmap <leader>h :h<space>
 nmap <leader>w :w<cr>	" fast saving
 nmap <leader>q :q<cr>	" fast quit
-" list current file
 " nmap <leader>c :!cd<space>
 nmap <leader>e :e<space>
 nmap <leader>wq :wq<cr> " save and quit
@@ -80,36 +79,36 @@ inoremap <Leader><Tab> <Tab>
 set nocompatible        " use vim defaults
 set scrolloff=3         " keep 3 lines when scrolling
 set ai                  " set auto-indenting on for programming
-set si			" smart indent
+set si					" smart indent
 set showcmd             " display incomplete commands
 set showmode
-set laststatus=2 	" always show the status line
+set laststatus=2 		" always show the status line
 " Format the status line
-set smarttab		" be smart when using tabs
+set smarttab			" be smart when using tabs
 set shiftwidth=4
 set tabstop=4		
 set number              " show line numbers
 set backspace=eol,start,indent " config backspace so it acts as it should act
 set whichwrap+=<,>,h,l
-set relativenumber	" show relative line number
+set relativenumber		" show relative line number
 set ruler               " show the current row and column
-set lazyredraw		" don't redraw while executing macros
-set wrap		" line wrap
-set linebreak		" do not break a word at end 
+set lazyredraw			" don't redraw while executing macros
+set wrap				" line wrap
+set linebreak			" do not break a word at end 
 set hlsearch            " highlight searches
 set incsearch           " do incremental searching
 set showmatch           " jump to matches when entering regexp
-set magic 		" for regular expression turn magic on
+set magic 				" for regular expression turn magic on
 set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
-set shortmess=atI	" do not show help uganda child message
+set shortmess=atI		" do not show help uganda child message
 
 set noerrorbells
 set novisualbell
 
-" status line {
 set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+
 highlight StatusLine guifg=SlateBlue guibg=Yellow
 highlight StatusLineNC guifg=Gray guibg=White
 
@@ -117,11 +116,9 @@ if has("gui_running")
 	set guifont=Courier:h11
 	set t_Co=256		" 256 color mode
 	set cursorline		" highlight current line
-	" highlight CursorLine guibg=LightGray ctermbg=24  gui=none cterm=none`
 endif
 
-set cursorline		" highlight current line
-" highlight CursorLine guibg=LightGray ctermbg=24  gui=none cterm=none
+set cursorline			" highlight current line
 
 " C/C++ specific settings
 autocmd FileType c,cpp,cc  set cindent comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30 
