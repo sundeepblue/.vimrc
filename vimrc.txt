@@ -3,27 +3,87 @@
 let mapleader=","
 let g:mapleader=","
 
+syntax on               " turn syntax highlighting on by default
+filetype on             " detect type of file
+filetype indent on      " load indent file for specific file type
+filetype plugin on 
+
 set autoread 			" auto read when file is changed from outside
 set history=100 		" keep 100 lines of command list history 
-autocmd! bufwritepost .vimrc source ~/.vimrc	"auto reload vimrc when editing
+"auto reload vimrc when editing
+autocmd! bufwritepost .vimrc source % 
 
 nmap <leader>h :h<space>
 nmap <leader>w :w<cr>	" fast saving
-nmap <leader>q :q<cr>	" fast quit
+nmap <leader>x :q<cr>	" fast quit
 " nmap <leader>c :!cd<space>
 nmap <leader>e :e<space>
 nmap <leader>wq :wq<cr> " save and quit
 nmap <leader>qf :q!<cr> " force quit
 
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Lightweight Latex editing
+""""""""""""""""""""""""""""""""""""""""""""""""
 " my CVIU paper related mappings
 nmap <leader>l :w<cr>:!pdflatex<space>%<cr>:!open<space>CVIU.pdf<cr><cr>
 nmap <leader>o :!open<space>CVIU.pdf<cr><cr>
 nmap <leader>ll :w<cr>:!pdflatex<space>%<cr>:!bibtex<space>CVIU.aux<cr>:!pdflatex<space>%<cr>:!pdflatex<space>%<cr>:!open<space>CVIU.pdf<cr><cr>
 " nmap <leader>cviu :e<space>~/Dropbox/research/IDEAS/IDEA_cvpr_iccv_tex/latex/CVIUfinal/CVIU.tex<cr>
 " comment a latex line 
-vmap <leader>c :norm<space>0i%<cr>
+vmap <leader>c :norm 0i%<cr>
 " uncomment a latex line
 vmap <leader>uc :norm<space>0x<cr>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" C/C++ file compiling
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+autocmd FileType c,cpp,cc  set cindent comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30 
+
+" % means filename plus extension, %< means filename without extension
+" compile/build c++ 
+"nmap <leader>b :w<cr>:!g++<space>%<space>-o<space>%<<cr>
+"nmap <leader>b :w<cr>:!g++ % -g -o %<<cr>
+
+func! Debug()
+	if &filetype=='c'
+		exec "!gcc % -g -o %<"
+		exec "!gdb %<"
+	elseif &filetype=='cpp'
+		exec "!g++ % -g -o %<"
+		exec "!gdb %<"
+	endif
+endfunc
+
+func! Compile()
+	if &filetype=='c'
+		exec "!gcc -Wall -enable-auto-import % -g -o %<"
+	elseif &filetype=='cpp'
+		exec "!g++ -Wall % -g -o %<"
+	endif
+endfunc
+
+func! Run()
+	exec "!./%<"
+endfunc
+
+set makeprg=g++\ \"%\"\ -g\ -o\ \"%<\"
+" nmap <leader>b :w<CR>:!clear<CR>:make<CR>
+nmap <leader>b :w<cr>:call Compile()<cr>
+nmap <leader>r :call Run()<cr>
+nmap <leader>d :call Debug()<cr>
+
+
+" jump to next compile error
+map <leader>cn :cn<cr>
+" jump to previous compile error
+map <leader>cp :cp<cr>
+" jump to 1st compile error
+map <leader>cf :cr<cr>
+" jump to the last compile error
+map <leader>cl :cla<cr>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " VIM Move around
@@ -121,16 +181,8 @@ endif
 
 set cursorline			" highlight current line
 
-" C/C++ specific settings
-autocmd FileType c,cpp,cc  set cindent comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30 
-
 "Restore cursor to file position in previous editing session
 set viminfo='10,\"100,:20,%,n~/.viminfo
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-
-syntax on               " turn syntax highlighting on by default
-filetype on             " detect type of file
-filetype indent on      " load indent file for specific file type
-filetype plugin on 
 
 
