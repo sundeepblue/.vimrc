@@ -13,6 +13,10 @@ set history=100 		" keep 100 lines of command list history
 "auto reload vimrc when editing
 autocmd! bufwritepost .vimrc source % 
 
+""""""""""""""""""""""""""""""""""""""""""""""""
+" My shortcut
+""""""""""""""""""""""""""""""""""""""""""""""""
+
 nmap <leader>h :h<space>
 nmap <leader>w :w<cr>	" fast saving
 nmap <leader>x :q<cr>	" fast quit
@@ -20,6 +24,8 @@ nmap <leader>x :q<cr>	" fast quit
 nmap <leader>e :e<space>
 nmap <leader>wq :wq<cr> " save and quit
 nmap <leader>qf :q!<cr> " force quit
+" count the total number of matches in previous search
+nmap<leader>ct :%s///gn<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Lightweight Latex editing
@@ -30,9 +36,9 @@ nmap <leader>o :!open<space>CVIU.pdf<cr><cr>
 nmap <leader>ll :w<cr>:!pdflatex<space>%<cr>:!bibtex<space>CVIU.aux<cr>:!pdflatex<space>%<cr>:!pdflatex<space>%<cr>:!open<space>CVIU.pdf<cr><cr>
 " nmap <leader>cviu :e<space>~/Dropbox/research/IDEAS/IDEA_cvpr_iccv_tex/latex/CVIUfinal/CVIU.tex<cr>
 " comment a latex line 
-vmap <leader>c :norm 0i%<cr>
+" vmap <leader>c :norm 0i%<cr>
 " uncomment a latex line
-vmap <leader>uc :norm<space>0x<cr>
+" vmap <leader>uc :norm<space>0x<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""
