@@ -14,7 +14,7 @@ set history=100 		" keep 100 lines of command list history
 autocmd! bufwritepost .vimrc source % 
 
 """"""""""""""""""""""""""""""""""""""""""""""""
-" My shortcut
+" My shortcuts
 """"""""""""""""""""""""""""""""""""""""""""""""
 
 nmap <leader>h :h<space>
@@ -25,7 +25,10 @@ nmap <leader>e :e<space>
 nmap <leader>wq :wq<cr> " save and quit
 nmap <leader>qf :q!<cr> " force quit
 " count the total number of matches in previous search
-nmap<leader>ct :%s///gn<cr>
+map <leader>ct :%s///gn<cr>
+
+" no need to input ':' manually
+map <leader>, :
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Lightweight Latex editing
@@ -125,7 +128,9 @@ if has("mac") || has("macunix")
 	vmap <D-k> <M-k>
 endif
 
-map <leader>tn :tabnew<cr>
+map <leader>te :tabnew<cr>
+map <leader>tn :tabn<cr>
+map <leader>tp :tabp<cr>
 map <leader>to :tabonly<cr>
 map <leader>tq :tabclose<cr>
  
