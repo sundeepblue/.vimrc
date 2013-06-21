@@ -24,8 +24,13 @@ nmap <leader>x :q<cr>	" fast quit
 nmap <leader>e :e<space>
 nmap <leader>wq :wq<cr> " save and quit
 nmap <leader>qf :q!<cr> " force quit
-" count the total number of matches in previous search
+
+" count the total number of matches in the latest search
+" :%s/./&/gn		count characters
+" :%s/\i\+/&/gn		count words
 map <leader>ct :%s///gn<cr>
+
+
 
 " no need to input ':' manually
 map <leader>, :
