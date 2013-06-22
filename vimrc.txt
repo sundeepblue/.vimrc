@@ -16,7 +16,6 @@ autocmd! bufwritepost .vimrc source %
 """"""""""""""""""""""""""""""""""""""""""""""""
 " My shortcuts
 """"""""""""""""""""""""""""""""""""""""""""""""
-
 nmap <leader>h :h<space>
 nmap <leader>w :w<cr>	" fast saving
 nmap <leader>x :q<cr>	" fast quit
@@ -29,8 +28,6 @@ nmap <leader>qf :q!<cr> " force quit
 " :%s/./&/gn		count characters
 " :%s/\i\+/&/gn		count words
 map <leader>ct :%s///gn<cr>
-
-
 
 " no need to input ':' manually
 map <leader>, :
@@ -52,7 +49,6 @@ nmap <leader>ll :w<cr>:!pdflatex<space>%<cr>:!bibtex<space>CVIU.aux<cr>:!pdflate
 """"""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ file compiling
 """"""""""""""""""""""""""""""""""""""""""""""""
-
 autocmd FileType c,cpp,cc  set cindent comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30 
 
 " % means filename plus extension, %< means filename without extension
@@ -88,7 +84,6 @@ nmap <leader>b :w<cr>:call Compile()<cr>
 nmap <leader>r :call Run()<cr>
 nmap <leader>d :call Debug()<cr>
 
-
 " jump to next compile error
 map <leader>cn :cn<cr>
 " jump to previous compile error
@@ -97,7 +92,6 @@ map <leader>cp :cp<cr>
 map <leader>cf :cr<cr>
 " jump to the last compile error
 map <leader>cl :cla<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " VIM Move around
@@ -138,7 +132,6 @@ map <leader>tn :tabn<cr>
 map <leader>tp :tabp<cr>
 map <leader>to :tabonly<cr>
 map <leader>tq :tabclose<cr>
- 
 
 imap ii <esc>
 " map esc to tab for all modes
@@ -148,11 +141,9 @@ onoremap <Tab> <Esc>
 inoremap <Tab> <Esc>`^
 inoremap <Leader><Tab> <Tab>
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""
 " VIM User interface
 """""""""""""""""""""""""""""""""""""""""""""""""
-
 set nocompatible        " use vim defaults
 set scrolloff=3         " keep 3 lines when scrolling
 set ai                  " set auto-indenting on for programming
@@ -200,5 +191,3 @@ set cursorline			" highlight current line
 "Restore cursor to file position in previous editing session
 set viminfo='10,\"100,:20,%,n~/.viminfo
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-
-
