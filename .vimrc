@@ -9,7 +9,8 @@ execute pathogen#infect()
 " vim-easymotion
 " undotree
 " nerdtree
-
+" taglist
+" cctree
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Pre-definitions
