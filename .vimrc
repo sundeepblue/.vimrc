@@ -1,4 +1,5 @@
 " First edited at 5/1/2013 by sundeepblue
+" Version 1.15 (Based on the commits)
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Plugin related settings
