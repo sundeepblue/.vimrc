@@ -1,5 +1,19 @@
-" 5/1/2013 by sundeepblue
+" First edited at 5/1/2013 by sundeepblue
 
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin related settings
+""""""""""""""""""""""""""""""""""""""""""""""""
+execute pathogen#infect()
+
+" autocmd vimenter * NERDTree
+" vim-easymotion
+" undotree
+" nerdtree
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Pre-definitions
+""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=","
 let g:mapleader=","
 
@@ -29,8 +43,13 @@ nmap <leader>qf :q!<cr> " force quit
 " :%s/\i\+/&/gn		count words
 map <leader>ct :%s///gn<cr>
 
-" no need to input ':' manually
-map <leader>, :
+" no need to input ':' manually, but lose the "go to next char" ability
+map ; :
+
+" in cmd mode, enter % and ! becomes easier
+cmap 55 %
+cmap 11 !
+
 " next buffer
 map <leader>,bn :bn<cr>
 map <leader>,bp :bp<cr>
@@ -184,7 +203,7 @@ highlight StatusLine guifg=SlateBlue guibg=Yellow
 highlight StatusLineNC guifg=Gray guibg=White
 
 if has("gui_running")
-	set guifont=Courier:h11
+	set guifont=Courier:h14
 	set t_Co=256		" 256 color mode
 	set cursorline		" highlight current line
 endif
