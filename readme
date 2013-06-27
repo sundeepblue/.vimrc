@@ -1,11 +1,15 @@
-# In the beginning, there was ed. 
-# ed begat ex, and ex begat vi, 
-# and vi begat vim.
+"In the beginning, there was ed. 
+
+ed begat ex, and ex begat vi, 
+
+and vi begat vim."
 
 
 This is my customized .vimrc file for VIM. I tailored it for my own need.
 
-It was inspired by many others' configurations files, and will be incrementally updated for the goal: simpler, faster, and powerful-er :)
+It was inspired by many others' configurations files, and will be incrementally updated for the goal: 
+
+simpler, faster, and powerful-er :)
 
 As a believer of minimalism, I fully believe tha Vim is the perfect combination of simplicity, beauty and power. 
 
