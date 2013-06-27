@@ -7,7 +7,11 @@
 execute pathogen#infect()
 
 " autocmd vimenter * NERDTree
+
 " vim-easymotion
+" Since <space>is set for search, use / as leader key instead of the default <leader><leader>
+let g:EasyMotion_leader_key = '/'
+
 " undotree
 " nerdtree
 " taglist
