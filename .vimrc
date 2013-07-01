@@ -48,14 +48,17 @@ nmap <leader>qf :q!<cr> " force quit
 " count the total number of matches in the latest search
 " :%s/./&/gn		count characters
 " :%s/\i\+/&/gn		count words
-map <leader>ct :%s///gn<cr>
+nmap <leader>ct :%s///gn<cr>
 
 " no need to input ':' manually, but lose the "go to next char" ability
 map ; :
 
-" in cmd mode, enter % and ! becomes easier
+" in cmd mode, enter %, !, ^, @ becomes easier
 cmap 55 %
+cmap 66 ^
 cmap 11 !
+cmap 22 @
+
 
 " select all contents
 map ggVG <leader>al
