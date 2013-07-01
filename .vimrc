@@ -13,6 +13,7 @@ execute pathogen#infect()
 " / still can be used as search
 let g:EasyMotion_leader_key = '/'
 
+" netrw
 " undotree
 " nerdtree
 " taglist
@@ -58,7 +59,6 @@ cmap 55 %
 cmap 66 ^
 cmap 11 !
 cmap 22 @
-
 
 " select all contents
 map ggVG <leader>al
