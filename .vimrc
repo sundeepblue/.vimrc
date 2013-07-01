@@ -57,6 +57,9 @@ map ; :
 cmap 55 %
 cmap 11 !
 
+" select all contents
+map ggVG <leader>al
+
 " next buffer
 map <leader>,bn :bn<cr>
 map <leader>,bp :bp<cr>
