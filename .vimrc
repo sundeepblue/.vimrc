@@ -62,6 +62,8 @@ cmap 22 @
 
 " select all contents
 map ggVG <leader>al
+" easily select all contents using left-hand
+map ggVG fa
 
 " next buffer
 map <leader>,bn :bn<cr>
