@@ -6,16 +6,17 @@
 """"""""""""""""""""""""""""""""""""""""""""""""
 execute pathogen#infect()
 
-" autocmd vimenter * NERDTree
+autocmd vimenter * NERDTree
 
 " vim-easymotion
 " Use / as leader key instead of the default <leader><leader>
 " / still can be used as search
-let g:EasyMotion_leader_key = '/'
+let g:EasyMotion_leader_key = '['
 
 " netrw
 " undotree
 " nerdtree
+nmap <leader>nt :NERDTree<cr>
 " taglist
 " cctree
 
@@ -30,6 +31,11 @@ filetype on             " detect type of file
 filetype indent on      " load indent file for specific file type
 filetype plugin on 
 
+" set working directory to the current file. Each time when run
+" a program, run this command to change working directory. Otherwise
+" the program won't run
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
 set autoread 			" auto read when file is changed from outside
 set history=100 		" keep 100 lines of command list history 
 "auto reload vimrc when editing
@@ -41,7 +47,6 @@ autocmd! bufwritepost .vimrc source %
 nmap <leader>h :h<space>
 nmap <leader>w :w<cr>	" fast saving
 nmap <leader>x :q<cr>	" fast quit
-" nmap <leader>c :!cd<space>
 nmap <leader>e :e<space>
 nmap <leader>wq :wq<cr> " save and quit
 nmap <leader>qf :q!<cr> " force quit
@@ -61,13 +66,13 @@ cmap 11 !
 cmap 22 @
 
 " select all contents
-map ggVG <leader>al
+map <leader>al ggVG
 " easily select all contents using left-hand
-map ggVG fa
+map fa ggVG
 
 " next buffer
-map <leader>,bn :bn<cr>
-map <leader>,bp :bp<cr>
+map <leader>bn :bn<cr>
+map <leader>bp :bp<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Lightweight Latex editing
@@ -117,7 +122,8 @@ endfunc
 
 set makeprg=g++\ \"%\"\ -g\ -o\ \"%<\"
 " nmap <leader>b :w<CR>:!clear<CR>:make<CR>
-nmap <leader>b :w<cr>:call Compile()<cr>
+nmap <leader>b :w<cr>:call Compile()<cr>:call Run()<cr>
+nmap <leader>c :w<cr>:call Compile()<cr>
 nmap <leader>r :call Run()<cr>
 nmap <leader>d :call Debug()<cr>
 
@@ -177,7 +183,7 @@ vnoremap <Tab> <Esc>gV
 onoremap <Tab> <Esc>
 inoremap <Tab> <Esc>`^
 inoremap <Leader><Tab> <Tab>
-
+" inoremap <Tab><Tab> <Tab>
 """""""""""""""""""""""""""""""""""""""""""""""""
 " VIM User interface
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -211,11 +217,18 @@ set shortmess=atI		" do not show help uganda child message
 set noerrorbells
 set novisualbell
 
+""""""""""""""""""""""""""""""""""""""""""""""""
+" GUI related settings
+""""""""""""""""""""""""""""""""""""""""""""""""
+
 set laststatus=2
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
-highlight StatusLine guifg=SlateBlue guibg=Yellow
-highlight StatusLineNC guifg=Gray guibg=White
+highlight StatusLine guifg=SlateBlue guibg=Red
+highlight StatusLineNC guifg=Gray guibg=Blue
+
+" When use NERDTree, remove the left-most vertical scrollbar
+set guioptions-=L
 
 if has("gui_running")
 	set guifont=Courier:h14
@@ -228,3 +241,4 @@ set cursorline			" highlight current line
 "Restore cursor to file position in previous editing session
 set viminfo='10,\"100,:20,%,n~/.viminfo
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
