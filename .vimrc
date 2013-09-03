@@ -6,17 +6,17 @@
 """"""""""""""""""""""""""""""""""""""""""""""""
 execute pathogen#infect()
 
-autocmd vimenter * NERDTree
-
 " vim-easymotion
-" Use / as leader key instead of the default <leader><leader>
-" / still can be used as search
+" Use '[' as leader key instead of the default <leader><leader>
+" Using '/' may easily cause conflicts with search
 let g:EasyMotion_leader_key = '['
 
 " netrw
 " undotree
 " nerdtree
+autocmd vimenter * NERDTree
 nmap <leader>nt :NERDTree<cr>
+
 " taglist
 " cctree
 
