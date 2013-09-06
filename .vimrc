@@ -70,10 +70,10 @@ map <leader>al ggVG
 " easily select all contents using left-hand
 map fa ggVG
 " left-hand fast quit
-map fq :q
+map fq :q<cr>
 " left-hand fast saving
-map fw :w
-map fww :w!
+map fw :w<cr>
+map fww :w!<cr>
 
 " next buffer
 map <leader>bn :bn<cr>
