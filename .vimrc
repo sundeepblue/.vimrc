@@ -74,6 +74,8 @@ map fq :q<cr>
 " left-hand fast saving
 map fw :w<cr>
 map fww :w!<cr>
+" left-hand list all matches, 'fs' means 'Fast Search list'
+map fs :g//<cr>
 
 " next buffer
 map <leader>bn :bn<cr>
