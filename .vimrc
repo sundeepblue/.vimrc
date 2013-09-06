@@ -69,6 +69,11 @@ cmap 22 @
 map <leader>al ggVG
 " easily select all contents using left-hand
 map fa ggVG
+" left-hand fast quit
+map fq :q
+" left-hand fast saving
+map fw :w
+map fww :w!
 
 " next buffer
 map <leader>bn :bn<cr>
