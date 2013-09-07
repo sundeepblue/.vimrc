@@ -9,7 +9,13 @@ execute pathogen#infect()
 " vim-easymotion
 " Use '[' as leader key instead of the default <leader><leader>
 " Using '/' may easily cause conflicts with search
-let g:EasyMotion_leader_key = '['
+let g:EasyMotion_leader_key="r"
+" Disable 'r' when it is used as leader key
+map r <Nop>
+let g:EasyMotion_keys='asdfgqwertzxcvb'
+let g:EasyMotion_do_shade=0
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade Comment
 
 " netrw
 " undotree
@@ -84,10 +90,10 @@ map <leader>bp :bp<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Lightweight Latex editing
 """"""""""""""""""""""""""""""""""""""""""""""""
-" my CVIU paper related mappings
-nmap <leader>l :w<cr>:!pdflatex<space>%<cr>:!open<space>CVIU.pdf<cr><cr>
-nmap <leader>o :!open<space>CVIU.pdf<cr><cr>
-nmap <leader>ll :w<cr>:!pdflatex<space>%<cr>:!bibtex<space>CVIU.aux<cr>:!pdflatex<space>%<cr>:!pdflatex<space>%<cr>:!open<space>CVIU.pdf<cr><cr>
+" my paper related mappings
+nmap <leader>l :w<cr>:!pdflatex<space>%<cr>:!open<space>dt.pdf<cr><cr>
+nmap <leader>o :!open<space>dt.pdf<cr><cr>
+nmap <leader>ll :w<cr>:!pdflatex<space>%<cr>:!bibtex<space>dt.aux<cr>:!pdflatex<space>%<cr>:!pdflatex<space>%<cr>:!open<space>dt.pdf<cr><cr>
 " nmap <leader>cviu :e<space>~/Dropbox/research/IDEAS/IDEA_cvpr_iccv_tex/latex/CVIUfinal/CVIU.tex<cr>
 " comment a latex line 
 " vmap <leader>c :norm 0i%<cr>
@@ -248,4 +254,5 @@ set cursorline			" highlight current line
 "Restore cursor to file position in previous editing session
 set viminfo='10,\"100,:20,%,n~/.viminfo
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
 
