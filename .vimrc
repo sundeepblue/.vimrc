@@ -13,6 +13,7 @@ let g:EasyMotion_leader_key="r"
 " Disable 'r' when it is used as leader key
 map r <Nop>
 let g:EasyMotion_keys='asdfgqwertzxcvb'
+let g:EasyMotion_grouping=2
 let g:EasyMotion_do_shade=0
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade Comment
