@@ -1,5 +1,14 @@
 " First edited at 5/1/2013 by sundeepblue
-" Version 1.15 (Based on the commits)
+" Version 1.9 (Based on the commits) 9/10/2013
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Pre-definitions
+""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader=","
+let g:mapleader=","
+
+"auto reload vimrc when editing
+autocmd! bufwritepost .vimrc source % 
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Plugin related settings
@@ -13,10 +22,10 @@ let g:EasyMotion_leader_key="r"
 " Disable 'r' when it is used as leader key
 map r <Nop>
 let g:EasyMotion_keys='asdfgqwertzxcvb'
-let g:EasyMotion_grouping=2
+let g:EasyMotion_grouping=1
 let g:EasyMotion_do_shade=0
 hi link EasyMotionTarget ErrorMsg
-hi link EasyMotionShade Comment
+" hi link EasyMotionShade Comment
 
 " netrw
 " undotree
@@ -27,30 +36,15 @@ nmap <leader>nt :NERDTree<cr>
 " taglist
 " cctree
 
-""""""""""""""""""""""""""""""""""""""""""""""""
-" Pre-definitions
-""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader=","
-let g:mapleader=","
 
-syntax on               " turn syntax highlighting on by default
-filetype on             " detect type of file
-filetype indent on      " load indent file for specific file type
-filetype plugin on 
-
+""""""""""""""""""""""""""""""""""""""""""""""""
+" My shortcuts
+""""""""""""""""""""""""""""""""""""""""""""""""
 " set working directory to the current file. Each time when run
 " a program, run this command to change working directory. Otherwise
 " the program won't run
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
-set autoread 			" auto read when file is changed from outside
-set history=100 		" keep 100 lines of command list history 
-"auto reload vimrc when editing
-autocmd! bufwritepost .vimrc source % 
-
-""""""""""""""""""""""""""""""""""""""""""""""""
-" My shortcuts
-""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>h :h<space>
 nmap <leader>w :w<cr>	" fast saving
 nmap <leader>x :q<cr>	" fast quit
@@ -87,68 +81,6 @@ map fs :g//<cr>
 " next buffer
 map <leader>bn :bn<cr>
 map <leader>bp :bp<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""
-" Lightweight Latex editing
-""""""""""""""""""""""""""""""""""""""""""""""""
-" my paper related mappings
-nmap <leader>l :w<cr>:!pdflatex<space>%<cr>:!open<space>dt.pdf<cr><cr>
-nmap <leader>o :!open<space>dt.pdf<cr><cr>
-nmap <leader>ll :w<cr>:!pdflatex<space>%<cr>:!bibtex<space>dt.aux<cr>:!pdflatex<space>%<cr>:!pdflatex<space>%<cr>:!open<space>dt.pdf<cr><cr>
-" nmap <leader>cviu :e<space>~/Dropbox/research/IDEAS/IDEA_cvpr_iccv_tex/latex/CVIUfinal/CVIU.tex<cr>
-" comment a latex line 
-" vmap <leader>c :norm 0i%<cr>
-" uncomment a latex line
-" vmap <leader>uc :norm<space>0x<cr>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""
-" C/C++ file compiling
-""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType c,cpp,cc  set cindent comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30 
-
-" % means filename plus extension, %< means filename without extension
-" compile/build c++ 
-"nmap <leader>b :w<cr>:!g++<space>%<space>-o<space>%<<cr>
-"nmap <leader>b :w<cr>:!g++ % -g -o %<<cr>
-
-func! Debug()
-	if &filetype=='c'
-		exec "!gcc % -g -o %<"
-		exec "!gdb %<"
-	elseif &filetype=='cpp'
-		exec "!g++ % -g -o %<"
-		exec "!gdb %<"
-	endif
-endfunc
-
-func! Compile()
-	if &filetype=='c'
-		exec "!gcc -Wall -enable-auto-import % -g -o %<"
-	elseif &filetype=='cpp'
-		exec "!g++ -Wall % -g -o %<"
-	endif
-endfunc
-
-func! Run()
-	exec "!./%<"
-endfunc
-
-set makeprg=g++\ \"%\"\ -g\ -o\ \"%<\"
-" nmap <leader>b :w<CR>:!clear<CR>:make<CR>
-nmap <leader>b :w<cr>:call Compile()<cr>:call Run()<cr>
-nmap <leader>c :w<cr>:call Compile()<cr>
-nmap <leader>r :call Run()<cr>
-nmap <leader>d :call Debug()<cr>
-
-" jump to next compile error
-map <leader>cn :cn<cr>
-" jump to previous compile error
-map <leader>cp :cp<cr>
-" jump to 1st compile error
-map <leader>cf :cr<cr>
-" jump to the last compile error
-map <leader>cl :cla<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " VIM Move around
@@ -198,9 +130,17 @@ onoremap <Tab> <Esc>
 inoremap <Tab> <Esc>`^
 inoremap <Leader><Tab> <Tab>
 " inoremap <Tab><Tab> <Tab>
+
 """""""""""""""""""""""""""""""""""""""""""""""""
 " VIM User interface
 """""""""""""""""""""""""""""""""""""""""""""""""
+syntax on               " turn syntax highlighting on by default
+filetype on             " detect type of file
+filetype indent on      " load indent file for specific file type
+filetype plugin on 
+
+set autoread 			" auto read when file is changed from outside
+set history=100 		" keep 100 lines of command list history 
 set nocompatible        " use vim defaults
 set scrolloff=3         " keep 3 lines when scrolling
 set ai                  " set auto-indenting on for programming
@@ -215,7 +155,7 @@ set tabstop=4
 set number              " show line numbers
 set backspace=eol,start,indent " config backspace so it acts as it should act
 set whichwrap+=<,>,h,l
-set relativenumber		" show relative line number
+" set relativenumber		" show relative line number
 set ruler               " show the current row and column
 set lazyredraw			" don't redraw while executing macros
 set wrap				" line wrap
@@ -256,4 +196,67 @@ set cursorline			" highlight current line
 set viminfo='10,\"100,:20,%,n~/.viminfo
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Lightweight Latex editing
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+" my paper related mappings
+nmap <leader>l :w<cr>:!pdflatex<space>%<cr>:!open<space>dt.pdf<cr><cr>
+nmap <leader>o :!open<space>dt.pdf<cr><cr>
+nmap <leader>ll :w<cr>:!pdflatex<space>%<cr>:!bibtex<space>dt.aux<cr>:!pdflatex<space>%<cr>:!pdflatex<space>%<cr>:!open<space>dt.pdf<cr><cr>
+" nmap <leader>cviu :e<space>~/Dropbox/research/IDEAS/IDEA_cvpr_iccv_tex/latex/CVIUfinal/CVIU.tex<cr>
+" comment a latex line 
+" vmap <leader>c :norm 0i%<cr>
+" uncomment a latex line
+" vmap <leader>uc :norm<space>0x<cr>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" C/C++ file compiling
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+autocmd FileType c,cpp,cc  set cindent comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,n0,f0,{0,}0,^-1s,:0,=s,g0,h1s,p2,t0,+2,(2,)20,*30 
+
+" % means filename plus extension, %< means filename without extension
+" compile/build c++ 
+"nmap <leader>b :w<cr>:!g++<space>%<space>-o<space>%<<cr>
+"nmap <leader>b :w<cr>:!g++ % -g -o %<<cr>
+
+func! Debug()
+	if &filetype=='c'
+		exec "!gcc % -g -o %<"
+		exec "!gdb %<"
+	elseif &filetype=='cpp'
+		exec "!g++ % -g -o %<"
+		exec "!gdb %<"
+	endif
+endfunc
+
+func! Compile()
+	if &filetype=='c'
+		exec "!gcc -Wall -enable-auto-import % -g -o %<"
+	elseif &filetype=='cpp'
+		exec "!g++ -Wall % -g -o %<"
+	endif
+endfunc
+
+func! Run()
+	exec "!./%<"
+endfunc
+
+set makeprg=g++\ \"%\"\ -g\ -o\ \"%<\"
+" nmap <leader>b :w<CR>:!clear<CR>:make<CR>
+nmap <leader>b :w<cr>:call Compile()<cr>:call Run()<cr>
+nmap <leader>c :w<cr>:call Compile()<cr>
+nmap <leader>r :call Run()<cr>
+nmap <leader>d :call Debug()<cr>
+
+" jump to next compile error
+map <leader>cn :cn<cr>
+" jump to previous compile error
+map <leader>cp :cp<cr>
+" jump to 1st compile error
+map <leader>cf :cr<cr>
+" jump to the last compile error
+map <leader>cl :cla<cr>
 
