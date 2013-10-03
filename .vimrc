@@ -105,6 +105,14 @@ map fw :w<cr>
 " left-hand list all matches, 'fs' means 'Fast Search list'
 map fs :g//<cr>
 
+" since 't' is barely used, why not map it to the frequently used 'top'?
+" map t gg
+" map 't' to 'page up'
+map t <PageUp>
+" since 'q' is rarely used, so i match it to a frequent operation
+" map 'q' to 'page down'
+map q <PageDown>
+
 " next buffer
 map <leader>bn :bn<cr>
 map <leader>bp :bp<cr>
