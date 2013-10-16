@@ -177,7 +177,7 @@ filetype plugin on
 set autoread 			" auto read when file is changed from outside
 set history=100 		" keep 100 lines of command list history 
 set nocompatible        " use vim defaults
-set scrolloff=3         " keep 3 lines when scrolling
+set scrolloff=2         " keep 3 lines when scrolling
 set ai                  " set auto-indenting on for programming
 set si					" smart indent
 set showcmd             " display incomplete commands
