@@ -85,6 +85,7 @@ nmap <leader>ct :%s///gn<cr>
 
 " no need to input ':' manually, but lose the "go to next char" ability
 map ; :
+map ;; :norm<space>
 
 " in cmd mode, enter %, !, ^, @ becomes easier
 cmap 55 %
