@@ -106,6 +106,11 @@ map fw :w<cr>
 " left-hand list all matches, 'fs' means 'Fast Search list'
 map fs :g//<cr>
 
+" super convenient and super quick :)
+" first press 'fa', then press 'fd', you can quickly enter command mode to process all lines at once, 
+" without leave left-hand off keyboard
+vmap fd :norm<space>
+
 " since 't' is barely used, why not map it to the frequently used 'top'?
 " map t gg
 " map 't' to 'page up'
