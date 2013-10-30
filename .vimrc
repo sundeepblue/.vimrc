@@ -36,6 +36,8 @@ nmap <leader>nt :NERDTree<cr>
 " taglist
 " cctree
 
+" quickly launch a bash inside vim
+map gc :ConqueTermVSplit<space>bash<cr> 
 
 """"""""""""""""" auto highlight words under cursor """""""""
 
