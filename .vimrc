@@ -36,8 +36,6 @@ nmap <leader>nt :NERDTree<cr>
 " taglist
 " cctree
 
-" quickly launch a bash inside vim
-map gc :ConqueTermVSplit<space>bash<cr> 
 
 """"""""""""""""" auto highlight words under cursor """""""""
 
@@ -116,6 +114,9 @@ map gs g,
 " first press 'fa', then press 'fd', you can quickly enter command mode to process all lines at once, 
 " without leave left-hand off keyboard
 vmap fd :norm<space>
+
+" quickly launch a bash inside vim
+map gc :ConqueTermVSplit<space>bash<cr> 
 
 " since 't' is barely used, why not map it to the frequently used 'top'?
 " map t gg
