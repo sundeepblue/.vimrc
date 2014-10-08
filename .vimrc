@@ -1,3 +1,5 @@
+" ultimate vimrc configuration: https://github.com/skwp/dotfiles
+" ultimate vimrc configuration 2: https://github.com/amix/vimrc
 " http://vimawesome.com/
 " http://benmccormick.org/2014/08/04/learning-vim-in-2014-search/
 
@@ -10,9 +12,12 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'ShowMarks'
+Plugin 'majutsushi/tagbar'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Shougo/unite.vim'
 Plugin 'rking/ag.vim'
 Plugin 'mileszs/ack.vim'
@@ -49,7 +54,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " taglist
 " cctree
 
-let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 nmap <leader>c :CtrlP<cr>
 
@@ -61,7 +66,7 @@ let g:agprg="ag --column --smart-case"
 
 if executable('ag')
 	" Use ag over grep
-	set grepprg=ag "\ --nogroup\ --nocolor
+	set grepprg=ag 
 	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 	" ag is fast enough that CtrlP doesn't need to cache
@@ -70,6 +75,11 @@ endif
 
 " bind K to grep word under cursor, for now, does not work very good! 
 " nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+nmap <leader>tt :TagbarToggle<cr>
+
+let g:showmarks_enable=1
+
 
 
 
@@ -114,6 +124,14 @@ nmap <leader>e :e<space>
 nmap <leader>wq :wq<cr> " save and quit
 nmap <leader>qf :q!<cr> " force quit
 
+
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+
+
 " count the total number of matches in the latest search
 " :%s/./&/gn		count characters
 " :%s/\i\+/&/gn		count words
@@ -135,7 +153,7 @@ map fa ggVG
 " left-hand fast quit
 map fq :q<cr>
 " left-hand fast saving
-map fw :w<cr>
+nmap fw :w<cr>
 " map fww :w!<cr>
 " map fwq :w!<cr>:q<cr>
 " left-hand list all matches, 'fs' means 'Fast Search list'
@@ -157,17 +175,36 @@ map gc :ConqueTermVSplit<space>bash<cr>
 map t <PageUp>
 " since 'q' is rarely used, so i match it to a frequent operation
 " map 'q' to 'page down'
-map q <PageDown>
+" sometimes q is used to quit a window. so better use another one.
+" map q <PageDown>
+" map g <PageDown>
 " next buffer
 map <leader>bn :bn<cr>
 map <leader>bp :bp<cr>
 
+" Easier linewise reselection of what you just pasted. not useful right now
+" nnoremap <leader>V V`]
+
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+
 """""""""""""""""""""""""""""""""""""""""""""""""
 " VIM Move around
 """""""""""""""""""""""""""""""""""""""""""""""""
+
+"Reselect visual block after in/outdenting
+vnoremap < <gv
+vnoremap > >gv
+
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
+" Easier to type, and I never use the default behavior.
+noremap H ^
+noremap L $
+vnoremap L g_
+
 " map 00 I  " i want to make 00 as I, but it does not work. why?
 " disable highlight
 map <silent> <leader><cr> :noh<cr> 
@@ -201,10 +238,11 @@ map <leader>tp :tabp<cr>
 map <leader>to :tabonly<cr>
 map <leader>tq :tabclose<cr>
 imap ii <esc>
+imap kj <esc>`^
 " map esc to tab for all modes
 nnoremap <Tab> <Esc>
 vnoremap <Tab> <Esc>gV
-onoremap <Tab> <Esc>
+onoremap <Tab> <Esc>`^
 inoremap <Tab> <Esc>`^
 inoremap <Leader><Tab> <Tab>
 " inoremap <Tab><Tab> <Tab>
@@ -246,6 +284,10 @@ set smartcase           " no ignorecase if Uppercase char present
 set shortmess=atI		" do not show help uganda child message
 set noerrorbells
 set novisualbell
+
+"Resize splits when the window is resized
+" au VimResized * exe "normal! \<c-w>="
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " GUI related settings
