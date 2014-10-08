@@ -1,9 +1,29 @@
-" mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-" git clone https://github.com/Lokaltog/vim-easymotion ~/.vim/bundle/vim-easymotion
-" git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
+" http://vimawesome.com/
+" http://benmccormick.org/2014/08/04/learning-vim-in-2014-search/
+
 "
+" do not change the following, they are required by vundle plugin manager
+set nocompatible              " be iMproved, required
+filetype off                  " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Shougo/unite.vim'
+Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'SirVer/ultisnips'
+"Plugin 'Valloric/YouCompleteMe'
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""
 " First edited at 5/1/2013 by sundeepblue
-" Version 1.9 (Based on the commits) 9/10/2013, 10/3/2014
+" Version 1.9 (Based on the commits) 9/10/2013
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Pre-definitions
@@ -16,18 +36,33 @@ autocmd! bufwritepost .vimrc source %
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Plugin related settings
 """"""""""""""""""""""""""""""""""""""""""""""""
-execute pathogen#infect()
 let g:EasyMotion_leader_key="r"
 " Disable 'r' when it is used as leader key
 map r <Nop>
 " hi link EasyMotionTarget ErrorMsg
 " hi link EasyMotionShade Comment
-nmap <leader>nt :NERDTree<cr>
+nmap <leader>n :NERDTree<cr>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " undotree
 " taglist
 " cctree
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pdf    " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+
+
+
+
+
+
+
+
+
 
 """"""""""""""""" auto highlight words under cursor """""""""
 " Highlight all instances of word under cursor, when idle.
@@ -62,15 +97,15 @@ endfunction
 " the program won't run
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 nmap <leader>h :h<space>
-nmap <leader>w :w<cr>   " fast saving
-nmap <leader>x :q<cr>   " fast quit
+nmap <leader>w :w<cr>	" fast saving
+nmap <leader>x :q<cr>	" fast quit
 nmap <leader>e :e<space>
 nmap <leader>wq :wq<cr> " save and quit
 nmap <leader>qf :q!<cr> " force quit
 
 " count the total number of matches in the latest search
-" :%s/./&/gn        count characters
-" :%s/\i\+/&/gn     count words
+" :%s/./&/gn		count characters
+" :%s/\i\+/&/gn		count words
 nmap <leader>ct :%s///gn<cr>
 " no need to input ':' manually, but lose the "go to next char" ability
 map ; :
@@ -143,10 +178,10 @@ nmap<M-k> mz:m-2<cr>`z
 vmap<M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap<M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 if has("mac") || has("macunix")
-    nmap <D-j> <M-j>
-    nmap <D-k> <M-k>
-    vmap <D-j> <M-j>
-    vmap <D-k> <M-k>
+	nmap <D-j> <M-j>
+	nmap <D-k> <M-k>
+	vmap <D-j> <M-j>
+	vmap <D-k> <M-k>
 endif
 
 map <leader>te :tabnew<cr>
@@ -170,34 +205,34 @@ syntax on               " turn syntax highlighting on by default
 filetype on             " detect type of file
 filetype indent on      " load indent file for specific file type
 filetype plugin on 
-set autoread            " auto read when file is changed from outside
-set history=100         " keep 100 lines of command list history 
+set autoread 			" auto read when file is changed from outside
+set history=100 		" keep 100 lines of command list history 
 set nocompatible        " use vim defaults
 set scrolloff=2         " keep 3 lines when scrolling
 set ai                  " set auto-indenting on for programming
-set si                  " smart indent
+set si					" smart indent
 set showcmd             " display incomplete commands
 set showmode
-set laststatus=2        " always show the status line
+set laststatus=2 		" always show the status line
 " Format the status line
-set smarttab            " be smart when using tabs
+set smarttab			" be smart when using tabs
 set shiftwidth=4
-set tabstop=4       
+set tabstop=4		
 set number              " show line numbers
 set backspace=eol,start,indent " config backspace so it acts as it should act
 set whichwrap+=<,>,h,l
-" set relativenumber        " show relative line number
+" set relativenumber		" show relative line number
 set ruler               " show the current row and column
-set lazyredraw          " don't redraw while executing macros
-set wrap                " line wrap
-set linebreak           " do not break a word at end 
+set lazyredraw			" don't redraw while executing macros
+set wrap				" line wrap
+set linebreak			" do not break a word at end 
 set hlsearch            " highlight searches
 set incsearch           " do incremental searching
 set showmatch           " jump to matches when entering regexp
-set magic               " for regular expression turn magic on
+set magic 				" for regular expression turn magic on
 set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
-set shortmess=atI       " do not show help uganda child message
+set shortmess=atI		" do not show help uganda child message
 set noerrorbells
 set novisualbell
 
@@ -212,12 +247,12 @@ highlight StatusLineNC guifg=Gray guibg=Blue
 " When use NERDTree, remove the left-most vertical scrollbar
 set guioptions-=L
 if has("gui_running")
-    set guifont=Courier:h14
-    set t_Co=256        " 256 color mode
-    set cursorline      " highlight current line
+	set guifont=Courier:h14
+	set t_Co=256		" 256 color mode
+	set cursorline		" highlight current line
 
 endif
-" set cursorline            " highlight current line
+" set cursorline			" highlight current line
 "Restore cursor to file position in previous editing session
 set viminfo='10,\"100,:20,%,n~/.viminfo
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
@@ -244,25 +279,25 @@ autocmd FileType c,cpp,cc  set cindent comments=sr:/*,mb:*,el:*/,:// cino=>s,e0,
 "nmap <leader>b :w<cr>:!g++ % -g -o %<<cr>
 
 func! Debug()
-    if &filetype=='c'
-        exec "!gcc % -g -o %<"
-        exec "!gdb %<"
-    elseif &filetype=='cpp'
-        exec "!g++ % -g -o %<"
-        exec "!gdb %<"
-    endif
+	if &filetype=='c'
+		exec "!gcc % -g -o %<"
+		exec "!gdb %<"
+	elseif &filetype=='cpp'
+		exec "!g++ % -g -o %<"
+		exec "!gdb %<"
+	endif
 endfunc
 
 func! Compile()
-    if &filetype=='c'
-        exec "!gcc -Wall -enable-auto-import % -g -o %<"
-    elseif &filetype=='cpp'
-        exec "!g++ -Wall % -g -o %<"
-    endif
+	if &filetype=='c'
+		exec "!gcc -Wall -enable-auto-import % -g -o %<"
+	elseif &filetype=='cpp'
+		exec "!g++ -Wall % -g -o %<"
+	endif
 endfunc
 
 func! Run()
-    exec "!./%<"
+	exec "!./%<"
 endfunc
 
 set makeprg=g++\ \"%\"\ -g\ -o\ \"%<\"
