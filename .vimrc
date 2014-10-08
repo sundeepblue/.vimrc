@@ -3,6 +3,8 @@
 " http://vimawesome.com/
 " http://benmccormick.org/2014/08/04/learning-vim-in-2014-search/
 
+" https://github.com/sjl/gundo.vim
+
 
 "
 " do not change the following, they are required by vundle plugin manager
