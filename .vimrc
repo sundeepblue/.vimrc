@@ -1,6 +1,7 @@
 " http://vimawesome.com/
 " http://benmccormick.org/2014/08/04/learning-vim-in-2014-search/
 
+
 "
 " do not change the following, they are required by vundle plugin manager
 set nocompatible              " be iMproved, required
@@ -50,15 +51,25 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+nmap <leader>c :CtrlP<cr>
+
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pdf    " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+let g:aghighlight=1
+let g:agprg="ag --column --smart-case"
 
+if executable('ag')
+	" Use ag over grep
+	set grepprg=ag "\ --nogroup\ --nocolor
+	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	" ag is fast enough that CtrlP doesn't need to cache
+	let g:ctrlp_use_caching = 0
+endif
 
-
-
-
-
+" bind K to grep word under cursor, for now, does not work very good! 
+" nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 
 
@@ -95,7 +106,7 @@ endfunction
 " set working directory to the current file. Each time when run
 " a program, run this command to change working directory. Otherwise
 " the program won't run
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <leader>d :cd %:p:h<CR>:pwd<CR>
 nmap <leader>h :h<space>
 nmap <leader>w :w<cr>	" fast saving
 nmap <leader>x :q<cr>	" fast quit
@@ -302,18 +313,18 @@ endfunc
 
 set makeprg=g++\ \"%\"\ -g\ -o\ \"%<\"
 " nmap <leader>b :w<CR>:!clear<CR>:make<CR>
-nmap <leader>b :w<cr>:call Compile()<cr>:call Run()<cr>
-nmap <leader>c :w<cr>:call Compile()<cr>
-nmap <leader>r :call Run()<cr>
-nmap <leader>d :call Debug()<cr>
+" nmap <leader>b :w<cr>:call Compile()<cr>:call Run()<cr>
+" nmap <leader>c :w<cr>:call Compile()<cr>
+" nmap <leader>r :call Run()<cr>
+" nmap <leader>d :call Debug()<cr>
 
 " jump to next compile error
-map <leader>cn :cn<cr>
+" map <leader>cn :cn<cr>
 " jump to previous compile error
-map <leader>cp :cp<cr>
+" map <leader>cp :cp<cr>
 " jump to 1st compile error
-map <leader>cf :cr<cr>
+" map <leader>cf :cr<cr>
 " jump to the last compile error
-map <leader>cl :cla<cr>
+" map <leader>cl :cla<cr>
 
 
