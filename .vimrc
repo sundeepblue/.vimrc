@@ -3,8 +3,6 @@
 " http://vimawesome.com/
 " http://benmccormick.org/2014/08/04/learning-vim-in-2014-search/
 
-" https://github.com/sjl/gundo.vim
-
 
 "
 " do not change the following, they are required by vundle plugin manager
@@ -16,13 +14,19 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ShowMarks'
 Plugin 'majutsushi/tagbar'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'junegunn/seoul256.vim' " color scheme
 Plugin 'scrooloose/nerdtree'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'terryma/vim-expand-region'
 Plugin 'Shougo/unite.vim'
 Plugin 'rking/ag.vim'
+" Plugin 'taglist'
+Plugin 'yegappan/mru'
 Plugin 'mileszs/ack.vim'
+Plugin 'junegunn/goyo.vim'
 Plugin 'SirVer/ultisnips'
 "Plugin 'Valloric/YouCompleteMe'
 call vundle#end()            " required
@@ -83,8 +87,15 @@ nmap <leader>tt :TagbarToggle<cr>
 let g:showmarks_enable=1
 
 
+" turn on goyo, distraction-free mode
+noremap <leader>gy :Goyo<cr>
+noremap <leader>nogy :Goyo!<cr>
 
-
+" seoul256 (light):
+"   Range:   252 (darkest) ~ 256 (lightest)
+"   Default: 253
+" let g:seoul256_background = 253
+" colo seoul256
 
 
 """"""""""""""""" auto highlight words under cursor """""""""
@@ -175,10 +186,15 @@ map gc :ConqueTermVSplit<space>bash<cr>
 " map t gg
 " map 't' to 'page up'
 map t <PageUp>
+" scroll half page up
+noremap U <c-u>
+" scroll half page down
+noremap M <c-d>
+
 " since 'q' is rarely used, so i match it to a frequent operation
 " map 'q' to 'page down'
 " sometimes q is used to quit a window. so better use another one.
-" map q <PageDown>
+map q <PageDown>
 " map g <PageDown>
 " next buffer
 map <leader>bn :bn<cr>
