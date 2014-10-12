@@ -17,15 +17,25 @@ Plugin 'majutsushi/tagbar'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'junegunn/seoul256.vim' " color scheme
+Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'matze/vim-move'
+
+" had not figure out how to use yet
+Plugin 'christoomey/vim-tmux-navigator'
+
+" useful when in the future want to run make or compile code
+" need to run tmux first, then vim
+Plugin 'benmills/vimux'
+
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'terryma/vim-expand-region'
 Plugin 'Shougo/unite.vim'
 Plugin 'rking/ag.vim'
 " Plugin 'taglist'
 Plugin 'yegappan/mru'
-Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'SirVer/ultisnips'
 "Plugin 'Valloric/YouCompleteMe'
@@ -91,11 +101,8 @@ let g:showmarks_enable=1
 noremap <leader>gy :Goyo<cr>
 noremap <leader>nogy :Goyo!<cr>
 
-" seoul256 (light):
-"   Range:   252 (darkest) ~ 256 (lightest)
-"   Default: 253
-" let g:seoul256_background = 253
-" colo seoul256
+" show undo history tree by Gundo plugin
+nnoremap <leader>ut :GundoToggle<cr>
 
 
 """"""""""""""""" auto highlight words under cursor """""""""
@@ -228,16 +235,20 @@ vnoremap L g_
 map <silent> <leader><cr> :noh<cr> 
 map <space> /
 " i manually map <Caps> to <Ctrl> in MAC Preference setting
-" map <caps> <ctrl>
+map <caps> <ctrl>
 map <c-space> ?
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-h> <c-w>h
-map <c-l> <c-w>l
-map <left> <nop>
-map <right> <nop>
-map <up> <nop>
-map <down> <nop>
+
+" disable below 4 lines due to conflict with vim-tmux-navigator
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-k> <c-w>k
+" nnoremap <c-h> <c-w>h
+" nnoremap <c-l> <c-w>l
+
+" map <left> <nop>
+" map <right> <nop>
+" map <up> <nop>
+" map <down> <nop>
+
 " move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 nmap<M-j> mz:m+<cr>`z
 nmap<M-k> mz:m-2<cr>`z
@@ -250,13 +261,27 @@ if has("mac") || has("macunix")
 	vmap <D-k> <M-k>
 endif
 
-map <leader>te :tabnew<cr>
-map <leader>tn :tabn<cr>
-map <leader>tp :tabp<cr>
-map <leader>to :tabonly<cr>
-map <leader>tq :tabclose<cr>
+map te :tabnew<cr>
+map tn :tabn<cr>
+map tp :tabp<cr>
+map to :tabonly<cr>
+map tq :tabclose<cr>
+
+" map <leader>te :tabnew<cr>
+" map <leader>tn :tabn<cr>
+" map <leader>tp :tabp<cr>
+" map <leader>to :tabonly<cr>
+" map <leader>tq :tabclose<cr>
+
 imap ii <esc>
 imap kj <esc>`^
+
+" Yank text to the OS X clipboard
+noremap <leader>y "*y
+noremap <leader>yy "*Y
+" " Preserve indentation while pasting text from the OS X clipboard
+noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+
 " map esc to tab for all modes
 nnoremap <Tab> <Esc>
 vnoremap <Tab> <Esc>gV
@@ -279,12 +304,15 @@ set scrolloff=2         " keep 3 lines when scrolling
 set ai                  " set auto-indenting on for programming
 set si					" smart indent
 set showcmd             " display incomplete commands
+" set listchars=tab:>~,nbsp:_,trail:.
+" set list
 set showmode
 set laststatus=2 		" always show the status line
 " Format the status line
 set smarttab			" be smart when using tabs
 set shiftwidth=4
 set tabstop=4		
+set wildmenu
 set number              " show line numbers
 set backspace=eol,start,indent " config backspace so it acts as it should act
 set whichwrap+=<,>,h,l
@@ -302,6 +330,7 @@ set smartcase           " no ignorecase if Uppercase char present
 set shortmess=atI		" do not show help uganda child message
 set noerrorbells
 set novisualbell
+" colorscheme solarized
 
 "Resize splits when the window is resized
 " au VimResized * exe "normal! \<c-w>="
@@ -321,7 +350,6 @@ if has("gui_running")
 	set guifont=Courier:h14
 	set t_Co=256		" 256 color mode
 	set cursorline		" highlight current line
-
 endif
 " set cursorline			" highlight current line
 "Restore cursor to file position in previous editing session
