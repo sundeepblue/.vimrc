@@ -312,6 +312,7 @@ set laststatus=2 		" always show the status line
 set smarttab			" be smart when using tabs
 set shiftwidth=4
 set tabstop=4		
+set expandtab
 set wildmenu
 set number              " show line numbers
 set backspace=eol,start,indent " config backspace so it acts as it should act
