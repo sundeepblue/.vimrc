@@ -161,10 +161,11 @@ map ; :
 map ;; :norm<space>
 
 " in cmd mode, enter %, !, ^, @ becomes easier
-cmap 55 %
-cmap 66 ^
-cmap 11 !
-cmap 22 @
+" actually, in practice, below is not effective.
+"cmap 55 %
+"cmap 66 ^
+"cmap 11 !
+"cmap 22 @
 
 " select all contents
 map <leader>al ggVG
@@ -332,6 +333,8 @@ set shortmess=atI		" do not show help uganda child message
 set noerrorbells
 set novisualbell
 " colorscheme solarized
+" it seems that 'delek' colorscheme is both good for normal mode, and for vimdiff mode. 
+colorscheme delek
 
 "Resize splits when the window is resized
 " au VimResized * exe "normal! \<c-w>="
