@@ -21,6 +21,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'matze/vim-move'
+Plugin 'klen/python-mode'
 
 " had not figure out how to use yet
 Plugin 'christoomey/vim-tmux-navigator'
@@ -31,14 +32,13 @@ Plugin 'benmills/vimux'
 
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'terryma/vim-expand-region'
-Plugin 'Shougo/unite.vim'
+"Plugin 'Shougo/unite.vim'
 Plugin 'rking/ag.vim'
 " Plugin 'taglist'
 Plugin 'yegappan/mru'
 " Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/goyo.vim'
-Plugin 'SirVer/ultisnips'
-"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'SirVer/ultisnips'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -64,6 +64,7 @@ map r <Nop>
 " hi link EasyMotionTarget ErrorMsg
 " hi link EasyMotionShade Comment
 nmap <leader>n :NERDTree<cr>
+let NERDTreeShowBookmarks=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " undotree
@@ -92,9 +93,13 @@ endif
 " bind K to grep word under cursor, for now, does not work very good! 
 " nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 
+map <leader>s :Ag!<space>
+map <space><space> :Ag!<space>
 nmap <leader>tt :TagbarToggle<cr>
 
-let g:showmarks_enable=1
+let g:pymode_options_colorcolumn = 0
+"let g:showmarks_enable=1
+"let g:showmarks_include="abcdefzx1234"
 
 
 " turn on goyo, distraction-free mode
@@ -145,11 +150,11 @@ nmap <leader>wq :wq<cr> " save and quit
 nmap <leader>qf :q!<cr> " force quit
 
 
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
-nnoremap <silent> * *zz
-nnoremap <silent> # #zz
-nnoremap <silent> g* g*zz
+"nnoremap <silent> n nzz
+"nnoremap <silent> N Nzz
+"nnoremap <silent> * *zz
+"nnoremap <silent> # #zz
+"nnoremap <silent> g* g*zz
 
 
 " count the total number of matches in the latest search
@@ -161,7 +166,6 @@ map ; :
 map ;; :norm<space>
 
 " in cmd mode, enter %, !, ^, @ becomes easier
-" actually, in practice, below is not effective.
 "cmap 55 %
 "cmap 66 ^
 "cmap 11 !
@@ -202,7 +206,7 @@ noremap M <c-d>
 " since 'q' is rarely used, so i match it to a frequent operation
 " map 'q' to 'page down'
 " sometimes q is used to quit a window. so better use another one.
-map q <PageDown>
+" map q <PageDown>
 " map g <PageDown>
 " next buffer
 map <leader>bn :bn<cr>
@@ -227,9 +231,9 @@ vnoremap > >gv
 map j gj
 map k gk
 " Easier to type, and I never use the default behavior.
-noremap H ^
-noremap L $
-vnoremap L g_
+" noremap H ^
+" oremap L $
+" noremap L g_
 
 " map 00 I  " i want to make 00 as I, but it does not work. why?
 " disable highlight
@@ -267,6 +271,9 @@ map tn :tabn<cr>
 map tp :tabp<cr>
 map to :tabonly<cr>
 map tq :tabclose<cr>
+
+map H :tabp<cr>
+map L :tabn<cr>
 
 " map <leader>te :tabnew<cr>
 " map <leader>tn :tabn<cr>
@@ -332,9 +339,8 @@ set smartcase           " no ignorecase if Uppercase char present
 set shortmess=atI		" do not show help uganda child message
 set noerrorbells
 set novisualbell
-" colorscheme solarized
-" it seems that 'delek' colorscheme is both good for normal mode, and for vimdiff mode. 
-colorscheme delek
+"colorscheme solarized
+colorscheme torte
 
 "Resize splits when the window is resized
 " au VimResized * exe "normal! \<c-w>="
