@@ -2,46 +2,8 @@
 " ultimate vimrc configuration 2: https://github.com/amix/vimrc
 " http://vimawesome.com/
 " http://benmccormick.org/2014/08/04/learning-vim-in-2014-search/
-
-
 "
 " do not change the following, they are required by vundle plugin manager
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'ShowMarks'
-Plugin 'majutsushi/tagbar'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'sjl/gundo.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'matze/vim-move'
-Plugin 'klen/python-mode'
-
-" had not figure out how to use yet
-Plugin 'christoomey/vim-tmux-navigator'
-
-" useful when in the future want to run make or compile code
-" need to run tmux first, then vim
-Plugin 'benmills/vimux'
-
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'terryma/vim-expand-region'
-"Plugin 'Shougo/unite.vim'
-Plugin 'rking/ag.vim'
-" Plugin 'taglist'
-Plugin 'yegappan/mru'
-" Plugin 'mileszs/ack.vim'
-Plugin 'junegunn/goyo.vim'
-"Plugin 'SirVer/ultisnips'
-call vundle#end()            " required
-filetype plugin indent on    " required
-
 
 """""""""""""""""""""""""""""""""""""""""""""""
 " First edited at 5/1/2013 by sundeepblue
@@ -55,29 +17,97 @@ let g:mapleader=","
 "auto reload vimrc when editing
 autocmd! bufwritepost .vimrc source % 
 
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+set noswapfile
+
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+""""""""""""""""""""""""""""" my favorate """""""""""""""""""""""
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'majutsushi/tagbar'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'mhinz/vim-startify'
+Plugin 'bling/vim-bufferline'
+Plugin 'MattesGroeger/vim-bookmarks'
+Plugin 'rking/ag.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'ervandew/supertab'
+Plugin 'szw/vim-maximizer'
+Plugin 'scrooloose/syntastic'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
+Plugin 'justincampbell/vim-eighties'
+
+"""""""""""""""""""""""""""" trying """"""""""""""""""""
+
+Plugin 'sjl/gundo.vim'
+""" Plugin 'Bling/vim-airline'
+ 
+" Plugin 'python-rope/ropevim'
+"Plugin 'matze/vim-move'   
+"Plugin 'klen/python-mode'
+
+
+" had not figure out how to use yet
+"Plugin 'christoomey/vim-tmux-navigator'
+" useful when in the future want to run make or compile code
+" need to run tmux first, then vim
+"Plugin 'benmills/vimux'
+"Plugin 'terryma/vim-multiple-cursors'
+"Plugin 'terryma/vim-expand-region'
+"Plugin 'Shougo/unite.vim'
+" Plugin 'taglist'
+"Plugin 'yegappan/mru'
+" Plugin 'mileszs/ack.vim'
+"Plugin 'SirVer/ultisnips'
+
+"""""""""""""""""""""""""""" has issue """""""""""
+"Plugin 'Valloric/YouCompleteMe'
+
+call vundle#end()
+
+filetype plugin indent on
+
+let g:gitgutter_sign_column_always = 1
+let g:nerdtree_tabs_open_on_console_startup=1
+let g:SuperTabDefaultCompletionType = "context"
+
+""""let g:airline#extensions#tabline#enabled = 1
+""""let g:airline#extensions#tabline#show_buffers = 1
+""""let g:airline#extensions#bufferline#enabled = 1
+""""let g:airline#extensions#tabline#buffer_nr_show = 0
+
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Plugin related settings
 """"""""""""""""""""""""""""""""""""""""""""""""
-let g:EasyMotion_leader_key="r"
+let g:EasyMotion_leader_key="e"
 " Disable 'r' when it is used as leader key
-map r <Nop>
+"map r <Nop>
 " hi link EasyMotionTarget ErrorMsg
 " hi link EasyMotionShade Comment
 nmap <leader>n :NERDTree<cr>
 let NERDTreeShowBookmarks=1
+" autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" undotree
-" taglist
-" cctree
 
 " let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 nmap <leader>c :CtrlP<cr>
 
 let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pdf    " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+" MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pdf    
+" Windows
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  
 let g:aghighlight=1
 let g:agprg="ag --column --smart-case"
 
@@ -93,22 +123,31 @@ endif
 " bind K to grep word under cursor, for now, does not work very good! 
 " nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-map <leader>s :Ag!<space>
+"map <leader>s :Ag!<space>
 map <space><space> :Ag!<space>
+
+map <leader>1 :1b<cr>
+map <leader>2 :2b<cr>
+map <leader>3 :3b<cr>
+map <leader>4 :4b<cr>
+map <leader>5 :5b<cr>
+map <leader>6 :6b<cr>
+map <leader>7 :7b<cr>
+map <leader>8 :8b<cr>
+map <leader>9 :9b<cr>
+let g:bufferline_echo = 1
+let g:bufferline_show_bufnr = 1
+
 nmap <leader>tt :TagbarToggle<cr>
 
-let g:pymode_options_colorcolumn = 0
-"let g:showmarks_enable=1
-"let g:showmarks_include="abcdefzx1234"
-
-
-" turn on goyo, distraction-free mode
-noremap <leader>gy :Goyo<cr>
-noremap <leader>nogy :Goyo!<cr>
+"let g:pymode_options_colorcolumn = 0
+" let g:showmarks_enable=1
+" let g:showmarks_include="abcdefzx1234"
 
 " show undo history tree by Gundo plugin
 nnoremap <leader>ut :GundoToggle<cr>
-
+nmap <leader>j :%!python -m json.tool<cr>
+nmap <leader>ev :tabe<space>~/.vimrc<cr>
 
 """"""""""""""""" auto highlight words under cursor """""""""
 " Highlight all instances of word under cursor, when idle.
@@ -142,12 +181,15 @@ endfunction
 " a program, run this command to change working directory. Otherwise
 " the program won't run
 nnoremap <leader>d :cd %:p:h<CR>:pwd<CR>
-nmap <leader>h :h<space>
-nmap <leader>w :w<cr>	" fast saving
-nmap <leader>x :q<cr>	" fast quit
-nmap <leader>e :e<space>
-nmap <leader>wq :wq<cr> " save and quit
-nmap <leader>qf :q!<cr> " force quit
+" nmap <leader>h :h<space>
+" fast saving
+" nmap <leader>w :w<cr>	
+" fast quit
+" nmap <leader>x :q<cr>	
+" save and quit
+" nmap <leader>wq :wq<cr> 
+" force quit
+"nmap <leader>qf :q!<cr>
 
 
 "nnoremap <silent> n nzz
@@ -157,13 +199,15 @@ nmap <leader>qf :q!<cr> " force quit
 "nnoremap <silent> g* g*zz
 
 
+
 " count the total number of matches in the latest search
 " :%s/./&/gn		count characters
 " :%s/\i\+/&/gn		count words
 nmap <leader>ct :%s///gn<cr>
 " no need to input ':' manually, but lose the "go to next char" ability
-map ; :
-map ;; :norm<space>
+nmap ; :
+vmap ; :norm<space>
+" nmap ;; :norm<space>
 
 " in cmd mode, enter %, !, ^, @ becomes easier
 "cmap 55 %
@@ -174,15 +218,15 @@ map ;; :norm<space>
 " select all contents
 map <leader>al ggVG
 " easily select all contents using left-hand
-map fa ggVG
+" map fa ggVG
 " left-hand fast quit
-map fq :q<cr>
+ map fq :q<cr>
 " left-hand fast saving
-nmap fw :w<cr>
+ nmap fw :w<cr>
 " map fww :w!<cr>
 " map fwq :w!<cr>:q<cr>
 " left-hand list all matches, 'fs' means 'Fast Search list'
-map fs :g//<cr>
+" map fs :g//<cr>
 " fast move to last and next edit positions
 map ga g;
 map gs g,
@@ -190,14 +234,14 @@ map gs g,
 " super convenient and super quick :)
 " first press 'fa', then press 'fd', you can quickly enter command mode to process all lines at once, 
 " without leave left-hand off keyboard
-vmap fd :norm<space>
+" vmap fd :norm<space>
 " quickly launch a bash inside vim
-map gc :ConqueTermVSplit<space>bash<cr> 
+" map gc :ConqueTermVSplit<space>bash<cr> 
 
 " since 't' is barely used, why not map it to the frequently used 'top'?
 " map t gg
 " map 't' to 'page up'
-map t <PageUp>
+"map t <PageUp>
 " scroll half page up
 noremap U <c-u>
 " scroll half page down
@@ -212,6 +256,27 @@ noremap M <c-d>
 map <leader>bn :bn<cr>
 map <leader>bp :bp<cr>
 
+map <leader>f :call<space>Flake8()<cr>
+"let g:flake8_show_in_file=1
+let g:flake8_show_in_gutter=1
+highlight link Flake8_Error      Error
+highlight link Flake8_Warning    WarningMsg
+highlight link Flake8_Complexity WarningMsg
+highlight link Flake8_Naming     WarningMsg
+highlight link Flake8_PyFlake    WarningMsg
+
+""set statusline+=%#warningmsg#
+""set statusline+=%{SyntasticStatuslineFlag()}
+""set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+map <leader>s :SyntasticCheck<cr>
+let g:syntastic_check_on_open = 0
+
 " Easier linewise reselection of what you just pasted. not useful right now
 " nnoremap <leader>V V`]
 
@@ -222,7 +287,6 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 """""""""""""""""""""""""""""""""""""""""""""""""
 " VIM Move around
 """""""""""""""""""""""""""""""""""""""""""""""""
-
 "Reselect visual block after in/outdenting
 vnoremap < <gv
 vnoremap > >gv
@@ -230,13 +294,6 @@ vnoremap > >gv
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
-" Easier to type, and I never use the default behavior.
-" noremap H ^
-" oremap L $
-" noremap L g_
-
-" map 00 I  " i want to make 00 as I, but it does not work. why?
-" disable highlight
 map <silent> <leader><cr> :noh<cr> 
 map <space> /
 " i manually map <Caps> to <Ctrl> in MAC Preference setting
@@ -244,15 +301,28 @@ map <caps> <ctrl>
 map <c-space> ?
 
 " disable below 4 lines due to conflict with vim-tmux-navigator
-" nnoremap <c-j> <c-w>j
-" nnoremap <c-k> <c-w>k
-" nnoremap <c-h> <c-w>h
-" nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+map <c-j> <c-w>j<c-w>_
+map <c-k> <c-w>k<c-w>_
+map # :MaximizerToggle!<cr>
+"map <c-h> <c-w>h<c-w><Bar>
+"map <c-l> <c-w>l<c-w><Bar>
+imap <C-w> <C-o><C-w>
+map - <C-W>-
+map _ <C-W>-
+map + <C-W>+
+set winminheight=0
+
 
 " map <left> <nop>
 " map <right> <nop>
 " map <up> <nop>
 " map <down> <nop>
+
 
 " move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 nmap<M-j> mz:m+<cr>`z
@@ -266,14 +336,23 @@ if has("mac") || has("macunix")
 	vmap <D-k> <M-k>
 endif
 
-map te :tabnew<cr>
-map tn :tabn<cr>
-map tp :tabp<cr>
-map to :tabonly<cr>
-map tq :tabclose<cr>
+"""""""""""""""""""""" tab """"""""""""""""""""
 
-map H :tabp<cr>
-map L :tabn<cr>
+map te :tabnew<cr>
+"map tn :tabn<cr>
+"map tp :tabp<cr>
+"map to :tabonly<cr>
+"map tq :tabclose<cr>
+
+"map H :tabp<cr>
+"map L :tabn<cr>
+
+map q :tabp<cr>
+map r :tabn<cr>
+map E <C-W><C-W>
+
+" map a :tabp<cr>
+" map f :tabn<cr>
 
 " map <leader>te :tabnew<cr>
 " map <leader>tn :tabn<cr>
@@ -281,8 +360,8 @@ map L :tabn<cr>
 " map <leader>to :tabonly<cr>
 " map <leader>tq :tabclose<cr>
 
-imap ii <esc>
-imap kj <esc>`^
+"imap ii <esc>
+"imap kj <esc>`^
 
 " Yank text to the OS X clipboard
 noremap <leader>y "*y
@@ -291,11 +370,11 @@ noremap <leader>yy "*Y
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 " map esc to tab for all modes
-nnoremap <Tab> <Esc>
-vnoremap <Tab> <Esc>gV
-onoremap <Tab> <Esc>`^
-inoremap <Tab> <Esc>`^
-inoremap <Leader><Tab> <Tab>
+""""nnoremap <Tab> <Esc>
+""""vnoremap <Tab> <Esc>gV
+""""onoremap <Tab> <Esc>`^
+""""inoremap <Tab> <Esc>`^
+""""inoremap <Leader><Tab> <Tab>
 " inoremap <Tab><Tab> <Tab>
 
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -339,8 +418,13 @@ set smartcase           " no ignorecase if Uppercase char present
 set shortmess=atI		" do not show help uganda child message
 set noerrorbells
 set novisualbell
-"colorscheme solarized
-colorscheme torte
+
+syntax enable
+set background=light
+colorscheme solarized
+
+"colorscheme torte
+colorscheme gruvbox
 
 "Resize splits when the window is resized
 " au VimResized * exe "normal! \<c-w>="
@@ -410,6 +494,8 @@ func! Run()
 endfunc
 
 set makeprg=g++\ \"%\"\ -g\ -o\ \"%<\"
+
+
 " nmap <leader>b :w<CR>:!clear<CR>:make<CR>
 " nmap <leader>b :w<cr>:call Compile()<cr>:call Run()<cr>
 " nmap <leader>c :w<cr>:call Compile()<cr>
@@ -425,4 +511,12 @@ set makeprg=g++\ \"%\"\ -g\ -o\ \"%<\"
 " jump to the last compile error
 " map <leader>cl :cla<cr>
 
+
+" Easier to type, and I never use the default behavior.
+" noremap H ^
+" oremap L $
+" noremap L g_
+
+" map 00 I  " i want to make 00 as I, but it does not work. why?
+" disable highlight
 
