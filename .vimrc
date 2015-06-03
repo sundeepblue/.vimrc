@@ -17,7 +17,6 @@ let g:mapleader=","
 "auto reload vimrc when editing
 autocmd! bufwritepost .vimrc source % 
 
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set noswapfile
@@ -42,10 +41,12 @@ Plugin 'rking/ag.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'ervandew/supertab'
 Plugin 'szw/vim-maximizer'
-Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'morhetz/gruvbox'
 Plugin 'justincampbell/vim-eighties'
+Plugin 'google/vim-colorscheme-primary'
+Plugin 'luochen1990/rainbow'
+Plugin 'mattn/gist-vim'
 
 """""""""""""""""""""""""""" trying """"""""""""""""""""
 
@@ -55,6 +56,7 @@ Plugin 'sjl/gundo.vim'
 " Plugin 'python-rope/ropevim'
 "Plugin 'matze/vim-move'   
 "Plugin 'klen/python-mode'
+Plugin 'scrooloose/syntastic'
 
 
 " had not figure out how to use yet
@@ -78,6 +80,11 @@ call vundle#end()
 filetype plugin indent on
 
 let g:gitgutter_sign_column_always = 1
+let g:gitgutter_override_sign_column_highlight = 0
+highlight clear SignColumn
+
+
+
 let g:nerdtree_tabs_open_on_console_startup=1
 let g:SuperTabDefaultCompletionType = "context"
 
@@ -85,6 +92,37 @@ let g:SuperTabDefaultCompletionType = "context"
 """"let g:airline#extensions#tabline#show_buffers = 1
 """"let g:airline#extensions#bufferline#enabled = 1
 """"let g:airline#extensions#tabline#buffer_nr_show = 0
+
+let g:bookmark_auto_save = 1
+let g:bookmark_manage_per_buffer = 1
+let g:bookmark_highlight_lines = 1
+let g:bookmark_auto_close = 1
+
+let g:bookmark_no_default_key_mappings = 1
+function! BookmarkMapKeys()
+    nmap mm :BookmarkToggle<CR>
+    nmap mi :BookmarkAnnotate<CR>
+    nmap mn :BookmarkNext<CR>
+    nmap mp :BookmarkPrev<CR>
+    nmap ma :BookmarkShowAll<CR>
+    nmap mc :BookmarkClear<CR>
+    nmap mx :BookmarkClearAll<CR>
+endfunction
+function! BookmarkUnmapKeys()
+    unmap mm
+    unmap mi
+    unmap mn
+    unmap mp
+    unmap ma
+    unmap mc
+    unmap mx
+endfunction
+autocmd BufEnter * :call BookmarkMapKeys()
+autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
+
+
+let g:rainbow_active = 1
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Plugin related settings
@@ -101,7 +139,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-nmap <leader>c :CtrlP<cr>
+"nmap <leader>c :CtrlP<cr>
 
 let g:ctrlp_working_path_mode = 'ra'
 " MacOSX/Linux
@@ -138,6 +176,7 @@ map <leader>9 :9b<cr>
 let g:bufferline_echo = 1
 let g:bufferline_show_bufnr = 1
 
+map 88 *
 nmap <leader>tt :TagbarToggle<cr>
 
 "let g:pymode_options_colorcolumn = 0
@@ -203,7 +242,7 @@ nnoremap <leader>d :cd %:p:h<CR>:pwd<CR>
 " count the total number of matches in the latest search
 " :%s/./&/gn		count characters
 " :%s/\i\+/&/gn		count words
-nmap <leader>ct :%s///gn<cr>
+""nmap <leader>ct :%s///gn<cr>
 " no need to input ':' manually, but lose the "go to next char" ability
 nmap ; :
 vmap ; :norm<space>
@@ -255,26 +294,30 @@ noremap M <c-d>
 " next buffer
 map <leader>bn :bn<cr>
 map <leader>bp :bp<cr>
+map <leader>bb :Startify<cr>
 
-map <leader>f :call<space>Flake8()<cr>
-"let g:flake8_show_in_file=1
-let g:flake8_show_in_gutter=1
-highlight link Flake8_Error      Error
-highlight link Flake8_Warning    WarningMsg
-highlight link Flake8_Complexity WarningMsg
-highlight link Flake8_Naming     WarningMsg
-highlight link Flake8_PyFlake    WarningMsg
+"----map <leader>f :call<space>Flake8()<cr>
+"----"let g:flake8_show_in_file=1
+"----let g:flake8_show_in_gutter=1
+"----highlight link Flake8_Error      Error
+"----highlight link Flake8_Warning    WarningMsg
+"----highlight link Flake8_Complexity WarningMsg
+"----highlight link Flake8_Naming     WarningMsg
+"----highlight link Flake8_PyFlake    WarningMsg
 
-""set statusline+=%#warningmsg#
-""set statusline+=%{SyntasticStatuslineFlag()}
-""set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_python_flake8_args='--ignore=E501'
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_save = 0
 let g:syntastic_check_on_wq = 0
 
-map <leader>s :SyntasticCheck<cr>
+map <leader>s :SyntasticCheck<space>flake8<space>pylint<cr>
+map <leader>f :SyntasticToggleMode<cr>
 let g:syntastic_check_on_open = 0
 
 " Easier linewise reselection of what you just pasted. not useful right now
@@ -419,12 +462,21 @@ set shortmess=atI		" do not show help uganda child message
 set noerrorbells
 set novisualbell
 
+
+"""""--------- nice color scheme
 syntax enable
 set background=light
-colorscheme solarized
-
+"colorscheme solarized
 "colorscheme torte
 colorscheme gruvbox
+
+"""""--------- google color scheme ---------
+"""""""syntax enable
+"""""""set t_Co=256
+"""""""set background=dark
+"""""""colorscheme primary
+
+
 
 "Resize splits when the window is resized
 " au VimResized * exe "normal! \<c-w>="
